@@ -1,36 +1,37 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+@extends('layouts.guest')
 
+@section('form')
+
+<div class="text-center mb-1 mt-1">
+    <img src="{{ asset('assets/images/favicon.ico') }}" height="80" class='mb-4'>
+    <h3>Iniciar Sesión</h3>
+    <p>Inicia sesión para continuar...</p>
+</div>
         <x-validation-errors class="mb-4" />
 
         <form method="POST" action="{{ route('password.update') }}">
             @csrf
-
+        
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
-            <div class="block">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
+        
+            <div class="form-group">
+                <label for="email">{{ __('Email') }}</label>
+                <input id="email" class="form-control" type="email" name="email" value="{{ old('email', $request->email) }}" required autofocus autocomplete="username">
             </div>
-
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+        
+            <div class="form-group">
+                <label for="password">{{ __('Password') }}</label>
+                <input id="password" class="form-control" type="password" name="password" required autocomplete="new-password">
             </div>
-
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+        
+            <div class="form-group">
+                <label for="password_confirmation">{{ __('Confirm Password') }}</label>
+                <input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required autocomplete="new-password">
             </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Reset Password') }}
-                </x-button>
+        
+            <div class="form-group text-right">
+                <button type="submit" class="btn btn-primary">{{ __('Reset Password') }}</button>
             </div>
         </form>
-    </x-authentication-card>
-</x-guest-layout>
+        
+@endsection
