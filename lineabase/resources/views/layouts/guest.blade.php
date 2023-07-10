@@ -3,7 +3,10 @@
 
 <head>
     <title>Iniciar Sesión</title>
-    @include('layouts.stylesheet')
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.css')}}">
+    
+    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" type="image/x-icon">
+    <link rel="stylesheet" href="{{asset('assets/css/app.css')}}">
 </head>
 
 <body>
@@ -26,7 +29,10 @@
     </div>
 
 
-    @include('layouts.scripts')
+    <script src="{{asset('assets/js/feather-icons/feather.min.js')}}"></script>
+    <script src="{{asset('assets/js/app.js')}}"></script>
+    
+    <script src="{{asset('assets/js/main.js')}}"></script>
 </body>
 
 </html>

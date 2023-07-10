@@ -18,13 +18,13 @@
     <form form method="POST" action="{{ route('login') }}">
         @csrf
         <div class="form-group position-relative has-icon-left">
-            <label for="username">Nombre de Usuario</label>
+            <label for="email">Nombre de Usuario</label>
             <div class="position-relative">
                 <div class="form-control-icon">
                     <i data-feather="user"></i>
                 </div>
                 <input id="email" class="form-control" type="email" name="email" value="{{ old('email') }}"
-                    required autofocus autocomplete="username">
+                    required autofocus autocomplete="email">
             </div>
         </div>
         <div class="form-group position-relative has-icon-left">
@@ -60,7 +60,7 @@
         </div>
     </form>
     <div class="divider">
-        <div class="divider-text">😉</div>
+        <div class="divider-text">Contáctanos</div>
     </div>
     <div class="row">
         <div class="col-sm-12">
