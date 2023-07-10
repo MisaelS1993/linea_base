@@ -1,9 +1,12 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+@extends('layouts.guest')
 
+@section('form')
+    <div class="text-center mb-1 mt-1">
+        <img src="{{ asset('assets/images/favicon.ico') }}" height="80" class='mb-4'>
+        <h3>Iniciar Sesión</h3>
+        <p>Inicia sesión para continuar...</p>
+    </div>
+    <div class="text-center text-danger mb-2 mt-1">
         <x-validation-errors class="mb-4" />
 
         @if (session('status'))
@@ -11,38 +14,58 @@
                 {{ session('status') }}
             </div>
         @endif
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div>
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+    </div>
+    <form form method="POST" action="{{ route('login') }}">
+        @csrf
+        <div class="form-group position-relative has-icon-left">
+            <label for="username">Nombre de Usuario</label>
+            <div class="position-relative">
+                <div class="form-control-icon">
+                    <i data-feather="user"></i>
+                </div>
+                <input id="email" class="form-control" type="email" name="email" value="{{ old('email') }}"
+                    required autofocus autocomplete="username">
             </div>
-
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
-
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
+        </div>
+        <div class="form-group position-relative has-icon-left">
+            <div class="clearfix">
+                <label for="password">Contraseña</label>
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
+                    <a href="{{ route('password.request') }}" class='float-right'>
+                        <small>¿Olvidó su contraseña?</small>
                     </a>
                 @endif
 
-                <x-button class="ml-4">
-                    {{ __('Log in') }}
-                </x-button>
             </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout>
+            <div class="position-relative">
+                <div class="form-control-icon">
+                    <i data-feather="lock"></i>
+                </div>
+                <input id="password" class="form-control" type="password" name="password" required
+                    autocomplete="current-password">
+            </div>
+        </div>
+
+        <div class='form-check clearfix my-4'>
+            <div class="checkbox float-left">
+                <input type="checkbox" id="checkbox1" class='form-check-input'>
+                <label for="checkbox1">Recuérdame</label>
+            </div>
+            <div class="float-right">
+
+            </div>
+        </div>
+        <div class="clearfix">
+            <button class="btn btn-primary float-right">Enviar</button>
+        </div>
+    </form>
+    <div class="divider">
+        <div class="divider-text">😉</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <a href="http://www.consejohiguito.hn/" class="btn btn-block mb-2 btn-secondary">
+                Consejo Intermunicipal Higuito</a>
+        </div>
+    </div>
+@endsection
