@@ -8,12 +8,20 @@ class Create extends Component
 {
     public $people = [];
     public $selected_id;
-    public $name, $age;
+    public $name, $age, $sex, $relationship;
+    public $ethnicity, $read_write, $study_now, $year_course, $total_year;
 
     // Input validation rules
     protected $rules = [
         'people.*.name' => 'required|string|NoNumbers|min:3',
         'people.*.age' => 'required|numeric|min:1|max:105',
+        'people.*.sex' => 'required',
+        'people.*.relationship' => 'required',
+        'people.*.ethnicity' => 'required',
+        'people.*.read_write' => 'required',
+        'people.*.study_now' => 'required',
+        'people.*.year_course' => 'required',
+        'people.*.total_year' => 'required|numeric|max:50',
 
     ];
 
@@ -24,6 +32,13 @@ class Create extends Component
         'people.*.name.string'  => 'El campo Nombre debe tener caracteres alfabéticos',
         'people.*.name.no_numbers'  => 'El campo Nombre no puedes guardar números',
         'people.*.age.required'  => 'El campo Edad es obligatorio',
+        'people.*.sex.required'  => 'Es obligatorio seleccionar el Sexo de la persona',
+        'people.*.relationship.required'  => 'Es obligatorio seleccionar el Parentesco de la persona ',
+        'people.*.ethnicity.required'  => 'Es obligatorio seleccionar la Etnia de la persona ',
+        'people.*.read_write.required'  => 'Es obligatorio seleccionar si Sabe Leer y Escribir la persona ',
+        'people.*.study_now.required'  => 'Es obligatorio seleccionar si la persona esta Estudiando ',
+        'people.*.year_course.required'  => 'Es obligatorio seleccionar el Año que esta Cursando la persona',
+        'people.*.total_year.required'  => 'Es obligatorio seleccionar el Año que esta Cursando la persona',
         
     ];
 
@@ -32,6 +47,13 @@ class Create extends Component
         $this->people[] = [
             'name' => '',
             'age' => '',
+            'sex' => '',
+            'relationship' => '',
+            'ethnicity' => '',
+            'read_write' => '',
+            'study_now' => '',
+            'year_course' => '',
+            'total_year' => '',
         ];
     }
 
