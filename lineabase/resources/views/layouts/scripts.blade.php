@@ -7,3 +7,8 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     @stack('modals')
     @livewireScripts
+
+    <!-- Our project just needs Font Awesome Solid + Brands -->
+    <script defer src="{{asset('assets/fontawesome/js/brands.js')}}"></script>
+    <script defer src="{{asset('assets/fontawesome/js/solid.js')}}"></script>
+    <script defer src="{{asset('assets/fontawesome/js/fontawesome.js')}}"></script>

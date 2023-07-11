@@ -5,3 +5,8 @@
     <link rel="stylesheet" href="{{asset('assets/vendors/chartjs/Chart.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css')}}">
     @livewireStyles
+
+    <!-- our project just needs Font Awesome Solid + Brands -->
+    <link href="{{asset('assets/fontawesome/css/fontawesome.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/fontawesome/css/brands.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/fontawesome/css/solid.css')}}" rel="stylesheet">

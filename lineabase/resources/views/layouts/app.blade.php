@@ -18,22 +18,18 @@
         <div id="main">
             @include('layouts.navigation')
             <div class="main-content container-fluid">
+                <div class="page-title">
+                    <h3>@yield('page-title')</h3>
+                    <p class="text-subtitle text-muted">
+                        @yield('subtitle')
+                    </p>
+                </div>
                 <!-- Page Content -->
-                <main>
-                    {{ $slot }}
-                </main>
+                @yield('content')
             </div>
 
             <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-left">
-                        <p>2023 &copy; Linea Base</p>
-                    </div>
-                    <div class="float-right">
-                        <p>Creado por <a
-                                href="">Misael Sanchez</a></p>
-                    </div>
-                </div>
+                @yield('footer')
             </footer>
         </div>
     </div>

@@ -26,3 +26,9 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::group(['middleware'=>['auth']],function(){
+    Route::view('/lineabase', 'pages/lineabase/index')->name('lineabase.index');
+    Route::view('/lineabase/new', 'pages/lineabase/create')->name('lineabase.create');
+    //Route::view('/lineabase/{id}', 'pages/lineabase/update')->name('lineabase.update');
+});
