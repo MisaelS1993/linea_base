@@ -10,7 +10,11 @@
                 @foreach ($people as $index => $person)
                 
                     <div class="card-body ">
+<<<<<<< Updated upstream
                         <div class="card">
+=======
+                        <div class="card mt-0 mb-0">
+>>>>>>> Stashed changes
                             <div class="card-body shadow-sm p-3 border border-secondary-subtle">
                                 <!-- Botón de eliminar en la esquina superior derecha -->
                                 <div class="d-flex justify-content-end">

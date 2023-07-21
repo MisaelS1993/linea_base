@@ -40,6 +40,7 @@
         <select class="form-control @error('people.' . $index . '.year_course') is-invalid @enderror" id="respuesta" 
         wire:model="people.{{ $index }}.year_course" required>
         <option value="">Seleccione...</option>
+<<<<<<< Updated upstream
         <option value="1">Pre-escolar</option>
         <option value="2">Grado 1</option>
         <option value="3">Grado 2</option>
@@ -53,6 +54,21 @@
         <option value="11">Diversificado</option>
         <option value="12">Universitario</option>
         <option value="13">Ninguno</option>
+=======
+        <option value="1">1.-Pre-escolar</option>
+        <option value="2">2.-Grado 1</option>
+        <option value="3">3.-Grado 2</option>
+        <option value="4">4.-Grado 3</option>
+        <option value="5">5.-Grado 4</option>
+        <option value="6">6.-Grado 5</option>
+        <option value="7">7.-Grado 6</option>
+        <option value="8">8.-Grado 7</option>
+        <option value="9">9.-Grado 8</option>
+        <option value="10">10.-Grado 9</option>
+        <option value="11">11.-Diversificado</option>
+        <option value="12">12.-Universitario</option>
+        <option value="13">13.-Ninguno</option>
+>>>>>>> Stashed changes
         </select>
         @error('people.' . $index . '.year_course')
             <div class="invalid-feedback">
