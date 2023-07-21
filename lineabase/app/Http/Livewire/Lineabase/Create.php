@@ -12,7 +12,7 @@ class Create extends Component
     public $name, $age, $sex, $relationship;
     public $ethnicity, $read_write, $study_now, $year_course, $total_year;
 =======
-    public $people = [];++
+    public $people = [];
     public $selected_id;
     public $name, $age, $sex, $relationship, $civil_status, $job, $occupation, $monthly_income, $sector;
     public $ethnicity, $read_write, $study_now, $year_course, $total_year, $profession_trade, $activity;
