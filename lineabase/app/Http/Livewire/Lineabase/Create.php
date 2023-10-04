@@ -8,32 +8,10 @@ class Create extends Component
 {
     public $people = [];
     public $selected_id;
-    public $name, $age, $sex, $relationship;
-    public $ethnicity, $read_write, $study_now, $year_course, $total_year;
-    public $profession_trade, $activity;
-    public $dedicated_sector;
+    public $name, $age, $sex, $relationship, $ethnicity, $read_write, $study_now, $year_course, $total_year;
+    public $profession_trade, $activity,  $dedicated_sector,$employment_sector, $organization;
+    public $Community_organization, $institutions, $loan, $consignment, $planification;
 
-    // Input validation rules
-    protected $rules = [
-        'people.*.name' => 'required|string|NoNumbers|min:3',
-        'people.*.age' => 'required|numeric|min:1|max:105',
-        'people.*.age' => 'required|numeric|max:105',
-        'people.*.sex' => 'required',
-        'people.*.relationship' => 'required',
-        'people.*.ethnicity' => 'required',
-        'people.*.read_write' => 'required',
-        'people.*.study_now' => 'required',
-        'people.*.year_course' => 'required',
-        'people.*.total_year' => 'required|numeric|max:50',
-        'people.*.civil_status' => 'required',
-        'people.*.job' => 'required',
-        'people.*.occupation' => 'required|string|NoNumbers|min:3',
-        'people.*.profession_trade' => 'required|string|NoNumbers|min:3',
-        'people.*.monthly_income' => 'required|numeric',
-        'people.*.activity' => 'required',
-        'people.*.sector' => 'required',
-        'people.*.dedicated_sector' => 'required',
-    ];
 
     // Messages rules
     protected $messages = [
@@ -42,7 +20,6 @@ class Create extends Component
         'people.*.name.string'  => 'El campo Nombre debe tener caracteres alfabéticos',
         'people.*.name.no_numbers'  => 'El campo Nombre no puedes guardar números',
         'people.*.age.required'  => 'El campo Edad es obligatorio',
-        'people.*.name.no_numbers'  => 'El campo Nombre no puede guardar números',
         'people.*.age.required'  => 'El campo Edad es obligatorio',
         'people.*.age.numeric'  => 'El campo Edad tiene que ser numerico',
         'people.*.age.max'  => 'El campo Edad tiene que ser menor la cantidad de años ingresados',
@@ -71,6 +48,16 @@ class Create extends Component
         'people.*.activity.required'  => 'El campo Que actividad económica realiza es obligatorio',
         'people.*.sector.required'  => 'El campo En que Sector esta Contratado es obligatorio',
         'people.*.dedicated_sector'  => 'El campo A que Sector se Dedica es obligatorio',
+        'people.*.employment_sector'  => 'El campo Cuanto Empleo Genera el Sector es obligatorio',
+        'people.*.organization'  => 'El campo Organización a la que Pertenece es obligatorio',
+        'people.*.Community_organization'  => 'El campo Participa en Organizaciones de la Comunidad es obligatorio',
+        'people.*.institutions.required'  => 'El campo Instituciones que Han Apoyado es obligatorio',
+        'people.*.institutions.min'  => 'El campo Instituciones que Han Apoyado debe tener mas de 3 caracteres',
+        'people.*.institutions.string'  => 'El campo Instituciones que Han Apoyado debe tener caracteres alfabéticos',
+        'people.*.institutions.no_numbers'  => 'El campo Instituciones que Han Apoyado no puedes guardar números',
+        'people.*.loan'  => 'El campo Ha obtenido un Prestamo es obligatorio',
+        'people.*.consignment'  => 'El campo Cuanto Recibe de Remesa es obligatorio',
+        'people.*.planification'  => 'El campo Método de Planificación es obligatorio',
     ];
 
     public function addPerson()
@@ -93,6 +80,12 @@ class Create extends Component
             'activity' => '',
             'sector' => '',
             'dedicated_sector' => '',
+            'employment_sector' => '',
+            'organization' => '',
+            'Community_organization' => '',
+            'loan' => '',
+            'consignment' => '',
+            'planification' => '',
         ];
     }
 
@@ -107,8 +100,63 @@ class Create extends Component
         return view('livewire.lineabase.create');
     }
 
-    public function store(){
-        $this->validate();
-        dd($this->people);
+    public function store()
+    {
+        foreach ($this->people as $person) {
+            // Obtener la edad de la persona actual en el bucle
+            $age = $person['age'];
+
+            // Realizar validaciones basadas en la edad
+            if ($age >= 1 && $age <= 3) {
+                //person from 1 to 3 years
+                $this->validate([
+                    'people.*.name' => 'required|string|NoNumbers|min:3',
+                    'people.*.age' => 'required|numeric|min:1|max:105',
+                    'people.*.sex' => 'required',
+                    'people.*.relationship' => 'required',
+                    'people.*.ethnicity' => 'required',
+                ]);
+            }else if ($age >= 4 && $age <= 9) {
+                //person from 4 to 9 years
+                $this->validate([
+                    'people.*.name' => 'required|string|NoNumbers|min:3',
+                    'people.*.age' => 'required|numeric|min:1|max:105',
+                    'people.*.sex' => 'required',
+                    'people.*.relationship' => 'required',
+                    'people.*.ethnicity' => 'required',
+                    'people.*.read_write' => 'required',
+                    'people.*.study_now' => 'required',
+                    'people.*.year_course' => 'required',
+                    'people.*.total_year' => 'required|numeric|max:50',
+                ]);
+            }else if ($age >= 10 && $age < 17) {
+                //person from 10 to 17 years
+               
+                $this->validate([
+                    'people.*.name' => 'required|string|NoNumbers|min:3',
+                    'people.*.age' => 'required|numeric|min:1|max:105',
+                    'people.*.sex' => 'required',
+                    'people.*.relationship' => 'required',
+                    'people.*.ethnicity' => 'required',
+                    'people.*.read_write' => 'required',
+                    'people.*.study_now' => 'required',
+                    'people.*.year_course' => 'required',
+                    'people.*.total_year' => 'required|numeric|max:50',
+                    'people.*.civil_status' => 'required',
+                    'people.*.job' => 'required',
+                    
+                    'people.*.occupation' => 'required|string|NoNumbers|min:3',
+                    'people.*.profession_trade' => 'required|string|NoNumbers|min:3',
+                    'people.*.monthly_income' => 'required|numeric',
+                    'people.*.activity' => 'required',
+                    'people.*.sector' => 'required',
+                    'people.*.dedicated_sector' => 'required',
+                    'people.*.employment_sector' => 'required',
+                    'people.*.organization' => 'required',
+                    'people.*.Community_organization' => 'required',
+                    'people.*.institutions' => 'required|string|NoNumbers|min:3',
+                ]);
+            }
+        }
     }
 }
