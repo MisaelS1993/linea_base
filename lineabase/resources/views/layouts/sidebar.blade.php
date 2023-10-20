@@ -9,17 +9,17 @@
                 <li class='sidebar-title'>Menu</li>
             
                 <li class="sidebar-item">
-                    <a href="{{route('lineabase.index')}}" class='sidebar-link'>
+                    <a href="{{route('lineabase.index')}}" class='sidebar-link text-info'>
                         <i data-feather="home" width="20"></i> 
-                        <span>Linea Base</span>
+                        <span class="text-info">Linea Base</span>
                     </a>
                     
                 </li>
             
                 <li class="sidebar-item active ">
-                    <a href="/dashboard" class='sidebar-link'>
+                    <a href="/dashboard" class='sidebar-link text-info'>
                         <i data-feather="home" width="20"></i> 
-                        <span>Dashboard</span>
+                        <span class="text-info">Dashboard</span>
                     </a>
                     
                 </li>
@@ -28,9 +28,9 @@
             
             
                 <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
+                    <a href="#" class='sidebar-link text-info'>
                         <i data-feather="triangle" width="20"></i> 
-                        <span>Components</span>
+                        <span class="text-info">Components</span>
                     </a>
                     
                     <ul class="submenu ">
@@ -99,9 +99,9 @@
             
             
                 <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
+                    <a href="#" class='sidebar-link text-info'>
                         <i data-feather="briefcase" width="20"></i> 
-                        <span>Extra Components</span>
+                        <span class="text-info">Extra Components</span>
                     </a>
                     
                     <ul class="submenu ">

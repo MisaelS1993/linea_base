@@ -6,6 +6,9 @@ use Livewire\Component;
 
 class Create extends Component
 {
+    public $date;
+
+
     public $people = [];
     public $selected_id;
     public $name, $age, $sex, $relationship, $ethnicity, $read_write, $study_now, $year_course, $total_year;
@@ -100,11 +103,14 @@ class Create extends Component
         return view('livewire.lineabase.create');
     }
 
+
     public function store()
     {
         foreach ($this->people as $person) {
-            // Obtener la edad de la persona actual en el bucle
+            // Obtener los datos de la persona actual en el bucle
             $age = $person['age'];
+            $job = $person['job'];
+            $activity = $person['activity'];
 
             // Realizar validaciones basadas en la edad
             if ($age >= 1 && $age <= 3) {
@@ -131,7 +137,42 @@ class Create extends Component
                 ]);
             }else if ($age >= 10 && $age < 17) {
                 //person from 10 to 17 years
-               
+
+
+                if ($job ==1){
+                    $this->validate([
+                        'people.*.job' => 'required',
+                        'people.*.occupation' => 'required|string|NoNumbers|min:3',
+                    ]);
+                }
+
+                    
+                if ($activity ==2 ){
+                    $this->validate([
+                        'people.*.sector' => 'required',
+                    ]);
+                }
+                if ($activity == 4){
+                    $this->validate([
+                        'people.*.sector' => 'required',
+                    ]);
+                }
+
+                if($activity ==5){
+                    $this->validate([
+                        'people.*.sector' => 'required',
+                    ]);
+                 }
+
+                if ($activity ==1){
+                    $this->validate([
+                        'people.*.dedicated_sector' => 'required',
+                        'people.*.employment_sector' => 'required',
+                        'people.*.organization' => 'required',
+                        'people.*.institutions' => 'required|string|NoNumbers|min:3',
+                    ]);
+                }
+
                 $this->validate([
                     'people.*.name' => 'required|string|NoNumbers|min:3',
                     'people.*.age' => 'required|numeric|min:1|max:105',
@@ -144,19 +185,24 @@ class Create extends Component
                     'people.*.total_year' => 'required|numeric|max:50',
                     'people.*.civil_status' => 'required',
                     'people.*.job' => 'required',
-                    
-                    'people.*.occupation' => 'required|string|NoNumbers|min:3',
                     'people.*.profession_trade' => 'required|string|NoNumbers|min:3',
                     'people.*.monthly_income' => 'required|numeric',
                     'people.*.activity' => 'required',
-                    'people.*.sector' => 'required',
-                    'people.*.dedicated_sector' => 'required',
-                    'people.*.employment_sector' => 'required',
-                    'people.*.organization' => 'required',
                     'people.*.Community_organization' => 'required',
-                    'people.*.institutions' => 'required|string|NoNumbers|min:3',
+                ]);
+
+            }else {
+                $this->validate([
+                    'people.*.name' => 'required|string|NoNumbers|min:3',
+                    'people.*.age' => 'required|numeric|min:1|max:105',
+                    'people.*.sex' => 'required',
+                    'people.*.relationship' => 'required',
+                    'people.*.ethnicity' => 'required',
                 ]);
             }
+
         }
+
+        dd($this->people);
     }
 }

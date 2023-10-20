@@ -115,7 +115,7 @@
     </div>
 </div>
 
-@if($people[$index]['job'] === '1')
+@if($people[$index]['job'] === '1') 
     <div class="col-md-6 col-12">
         <div class="form-group">
             <label for="occupation">Ocupacion Actual</label>
