@@ -15,6 +15,15 @@
                     </a>
                     
                 </li>
+
+                <li class="sidebar-item">
+                    <a href="{{route('boleta.index')}}" class='sidebar-link text-info'>
+                        <i data-feather="home" width="20"></i> 
+                        <span class="text-info">Boleta Linea Base</span>
+                    </a>
+                    
+                </li>
+            
             
                 <li class="sidebar-item active ">
                     <a href="/dashboard" class='sidebar-link text-info'>
