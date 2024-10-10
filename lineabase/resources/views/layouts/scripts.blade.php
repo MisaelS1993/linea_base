@@ -12,3 +12,6 @@
     <script defer src="{{asset('assets/fontawesome/js/brands.js')}}"></script>
     <script defer src="{{asset('assets/fontawesome/js/solid.js')}}"></script>
     <script defer src="{{asset('assets/fontawesome/js/fontawesome.js')}}"></script>
+
+    <!-- Mask para los controles -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA=" crossorigin="anonymous"></script>

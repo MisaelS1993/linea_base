@@ -4,4 +4,5 @@
 @section('subtitle', 'Boletas | Creando')
 
 @section('content')
+@livewire('boleta.crear')
 @endsection
