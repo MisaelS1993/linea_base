@@ -6,10 +6,15 @@
 
     <div class="card">
         <div class="card-header">
-            <h5 class="fw-semibold text-xl text-dark">Gestión de Aldeas</h5>
-            <!-- Botón para abrir el modal -->
-            <button type="button" wire:click="create()" class="btn btn-primary float-end mr-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Nueva Aldea</button>
+            <h3 class="mt-4">Gestor de Aldeas</h3>
         </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <!-- Botón para abrir el modal -->
+                    <button type="button" wire:click="create()" class="btn btn-primary btn-sm mt-2 mb-2 float-end mr-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Nueva Aldea</button>
+                </div>
+            </div>
 
         <div class="card-body">
             <!-- Mensaje de éxito -->
@@ -21,13 +26,13 @@
             @endif
 
             <!-- Campo de búsqueda por aldea -->
-            <div class="row mb-3 mt-3">
+            <div class="row mb-3">
                 <div class="col-3 float-end">
                     <input type="text" wire:model="searchTerm" class="form-control" placeholder="Buscar por nombre de aldea o municipio">
                 </div>
             </div>
 
-            <div class="row">
+            <div class="table-responsive">
                 <div class="col-12">
                     <!-- Tabla de aldeas -->
                     <table class="table table-primary table-bordered table-striped">

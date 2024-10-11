@@ -6,12 +6,15 @@
 
     <div class="card">
         <div class="card-header">
-            <h5 class="fw-semibold text-xl text-dark">Gestión de Departamentos</h5>
-            <!-- Botón para abrir el modal -->
-            <button type="button" wire:click="create()" class="btn btn-primary float-end mr-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo Departamento</button>
-
+            <h3 class="mt-4">Gestor de Departamentos</h3>
         </div>
         <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Botón para abrir el modal -->
+                    <button type="button" wire:click="create()" class="btn btn-primary btn-sm float-end mr-2 mb-2 mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo Departamento</button>
+                </div>
+            </div>
 
             @if(session()->has('message'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -21,7 +24,7 @@
             @endif
 
 
-            <div class="row">
+            <div class="table-responsive">
                 <div class="col-12">
                     <table class="table table-primary table-bordered table-striped">
                         <thead>

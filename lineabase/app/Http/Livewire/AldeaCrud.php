@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class AldeaCrud extends Component
 {
     public $aldeas, $municipios, $municipio_id, $descripcion, $aldea_id;
-    public $isModalOpen = false;
+    public $isModalOpen = false; 
 
     public $searchTerm = ''; // Para la búsqueda por nombre de aldea o municipio
 

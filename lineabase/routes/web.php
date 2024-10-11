@@ -5,6 +5,8 @@ use App\Http\Livewire\DepartamentoCrud;
 use App\Http\Livewire\MunicipioCrud;
 use App\Http\Livewire\AldeaCrud;
 
+use App\Http\Livewire\Boleta\ControlCrud;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,4 +34,7 @@ Route::middleware([
     Route::get('/departamentos', DepartamentoCrud::class)->name('departamentos.index');
     Route::get('/municipios', MunicipioCrud::class)->name('municipios.index');
     Route::get('/aldeas', AldeaCrud::class)->name('aldea.index');
+
+
+    Route::get('/control', ControlCrud::class)->name('control.index');
 });

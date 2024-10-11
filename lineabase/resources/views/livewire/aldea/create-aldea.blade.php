@@ -1,6 +1,6 @@
 <!-- Modal -->
 @if($isModalOpen)
-<div class="modal fade text-left show" data-bs-backdrop="static" data-bs-keyboard="false" style="display: block;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade text-left show" data-bs-backdrop="static" data-bs-keyboard="false" style="display: block;" tabindex="-1" aria-labelledby="Boleta" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered"> <!-- Centrado -->
         <div class="modal-content">
             <div class="modal-header">

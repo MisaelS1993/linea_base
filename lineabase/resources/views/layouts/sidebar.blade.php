@@ -18,6 +18,14 @@
                     
                 </li>
 
+                <li class="sidebar-item">
+                    <a href="/control" class='sidebar-link'>
+                        <i data-feather="file-text" width="20"></i> 
+                        <span>Boleta</span>
+                    </a>
+                    
+                </li>
+
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="globe" width="20"></i> 
