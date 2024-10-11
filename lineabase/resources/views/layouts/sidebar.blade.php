@@ -11,36 +11,39 @@
             
             
                 <li class="sidebar-item active ">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="/dashboard" class='sidebar-link'>
                         <i data-feather="home" width="20"></i> 
                         <span>Dashboard</span>
                     </a>
                     
                 </li>
 
-                <li class="sidebar-item">
-                    <a href="/departamentos" class='sidebar-link'>
-                        <i data-feather="home" width="20"></i> 
-                        <span>Departamentos</span>
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i data-feather="globe" width="20"></i> 
+                        <span>Jusdirección</span>
                     </a>
                     
-                </li>
-
-                <li class="sidebar-item">
-                    <a href="/municipios" class='sidebar-link'>
-                        <i data-feather="home" width="20"></i> 
-                        <span>Municipios</span>
-                    </a>
+                    <ul class="submenu ">
+                        
+                        <li>
+                            <a href="/departamentos">Departamentos</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/municipios">Municipios</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/aldeas">Aldeas</a>
+                        </li>
+                        
+                        
+                    </ul>
                     
                 </li>
             
-                <li class="sidebar-item">
-                    <a href="/aldeas" class='sidebar-link'>
-                        <i data-feather="home" width="20"></i> 
-                        <span>Aldeas</span>
-                    </a>
-                    
-                </li>
+
             
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>

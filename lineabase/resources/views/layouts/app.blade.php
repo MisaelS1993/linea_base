@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    
+
     @include('layouts.stylesheet')
 
 </head>
@@ -21,17 +21,19 @@
                 </main>
             </div>
 
-            <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-left">
-                        <p>2023 &copy; Linea Base</p>
-                    </div>
-                    <div class="float-right">
-                        <p>Creado por <a
-                                href="">Misael Sanchez</a></p>
+            <footer class="bg-light text-muted">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-left">
+                            <p class="mb-0">2023 &copy; Linea Base</p>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <p class="mb-0">Creado por <a href="#" class="text-primary">Misael Sanchez</a></p>
+                        </div>
                     </div>
                 </div>
             </footer>
+
         </div>
     </div>
     @include('layouts.scripts')
