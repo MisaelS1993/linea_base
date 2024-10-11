@@ -18,7 +18,13 @@
                     
                 </li>
 
-            
+                <li class="sidebar-item">
+                    <a href="/departamentos" class='sidebar-link'>
+                        <i data-feather="home" width="20"></i> 
+                        <span>Departamentos</span>
+                    </a>
+                    
+                </li>
             
             
                 <li class="sidebar-item  has-sub">
