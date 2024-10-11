@@ -1,5 +1,4 @@
 <!-- Modal -->
-<!-- Modal -->
 @if($isModalOpen)
 <div class="modal fade text-left show" data-bs-backdrop="static" data-bs-keyboard="false" style="display: block;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered"> <!-- Agregamos modal-dialog-centered aquí -->

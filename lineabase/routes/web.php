@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\DepartamentoCrud;
+use App\Http\Livewire\MunicipioCrud;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +29,5 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/departamentos', DepartamentoCrud::class)->name('departamentos.index');
+    Route::get('/municipios', MunicipioCrud::class)->name('municipios.index');
 });

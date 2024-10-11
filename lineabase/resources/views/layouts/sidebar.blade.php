@@ -25,6 +25,14 @@
                     </a>
                     
                 </li>
+
+                <li class="sidebar-item">
+                    <a href="/municipios" class='sidebar-link'>
+                        <i data-feather="home" width="20"></i> 
+                        <span>Municipios</span>
+                    </a>
+                    
+                </li>
             
             
                 <li class="sidebar-item  has-sub">

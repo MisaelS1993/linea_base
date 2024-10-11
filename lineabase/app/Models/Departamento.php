@@ -11,4 +11,10 @@ class Departamento extends Model
 
     // Añadir los campos que pueden ser asignados masivamente
     protected $fillable = ['descripcion'];
+
+    // Un departamento tiene muchos municipios
+    public function municipios()
+    {
+        return $this->hasMany(Municipio::class);
+    }
 }
