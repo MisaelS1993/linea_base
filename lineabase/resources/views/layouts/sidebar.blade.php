@@ -34,6 +34,13 @@
                     
                 </li>
             
+                <li class="sidebar-item">
+                    <a href="/aldeas" class='sidebar-link'>
+                        <i data-feather="home" width="20"></i> 
+                        <span>Aldeas</span>
+                    </a>
+                    
+                </li>
             
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\DepartamentoCrud;
 use App\Http\Livewire\MunicipioCrud;
+use App\Http\Livewire\AldeaCrud;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,5 @@ Route::middleware([
 
     Route::get('/departamentos', DepartamentoCrud::class)->name('departamentos.index');
     Route::get('/municipios', MunicipioCrud::class)->name('municipios.index');
+    Route::get('/aldeas', AldeaCrud::class)->name('aldea.index');
 });

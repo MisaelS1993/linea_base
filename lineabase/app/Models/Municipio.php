@@ -16,4 +16,10 @@ class Municipio extends Model
     {
         return $this->belongsTo(Departamento::class);
     }
+    
+    // Relación uno a muchos con Aldea
+    public function aldeas()
+    {
+        return $this->hasMany(Aldea::class);
+    }
 }
