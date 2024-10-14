@@ -4,15 +4,20 @@
     @endif
 
 
-    <div class="card">
-        <div class="card-header">
+    <div class="card border-success">
+        <div class="card-header bg-success">
             <h3 class="mt-4">Gestor de Departamentos</h3>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-12">
                     <!-- Botón para abrir el modal -->
-                    <button type="button" wire:click="create()" class="btn btn-primary btn-sm float-end mr-2 mb-2 mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo Departamento</button>
+                    <button type="button" wire:click="create()" class="btn btn-success round float-end mr-2 mb-2 mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <div class="spinner-grow spinner-grow-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <b>Nuevo Departamento</b>
+                    </button>
                 </div>
             </div>
 
@@ -26,8 +31,8 @@
 
             <div class="table-responsive">
                 <div class="col-12">
-                    <table class="table table-primary table-bordered table-striped">
-                        <thead>
+                    <table class="table table-bordered">
+                        <thead class="table-success">
                             <tr>
                                 <th>ID</th>
                                 <th>Descripción</th>

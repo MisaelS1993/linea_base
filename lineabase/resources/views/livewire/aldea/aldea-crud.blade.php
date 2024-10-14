@@ -1,28 +1,33 @@
 <div class="container mt-5">
     <!-- Modal para crear/editar aldeas -->
     @if($isModalOpen)
-        @include('livewire.aldea.create-aldea') <!-- Tu modal aquí -->
+    @include('livewire.aldea.create-aldea') <!-- Tu modal aquí -->
     @endif
 
-    <div class="card">
-        <div class="card-header">
+    <div class="card border-success">
+        <div class="card-header bg-success">
             <h3 class="mt-4">Gestor de Aldeas</h3>
         </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <!-- Botón para abrir el modal -->
-                    <button type="button" wire:click="create()" class="btn btn-primary btn-sm mt-2 mb-2 float-end mr-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Nueva Aldea</button>
-                </div>
+        <div class="row">
+            <div class="col-12">
+                <!-- Botón para abrir el modal -->
+                <button type="button" wire:click="create()" class="btn btn-success round mt-2 mb-2 float-end mr-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <div class="spinner-grow spinner-grow-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <b>Nueva Aldea</b>
+                </button>
             </div>
+        </div>
 
         <div class="card-body">
             <!-- Mensaje de éxito -->
             @if(session()->has('message'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('message') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             @endif
 
             <!-- Campo de búsqueda por aldea -->
@@ -35,8 +40,8 @@
             <div class="table-responsive">
                 <div class="col-12">
                     <!-- Tabla de aldeas -->
-                    <table class="table table-primary table-bordered table-striped">
-                        <thead>
+                    <table class="table table-bordered">
+                        <thead class="table-success">
                             <tr>
                                 <th>ID</th>
                                 <th>Descripción</th>
@@ -46,19 +51,19 @@
                         </thead>
                         <tbody>
                             @foreach($aldeas as $aldea)
-                                <tr>
-                                    <td>{{ $aldea->id }}</td>
-                                    <td>{{ $aldea->descripcion }}</td>
-                                    <!-- Mostramos el nombre del municipio al que pertenece la aldea -->
-                                    <td>{{ $aldea->municipio->descripcion }}</td>
-                                    <td class="col-2">
-                                        <!-- Botones para editar y borrar -->
-                                        <button wire:click="edit({{ $aldea->id }})" class="btn btn-warning"
-                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">EDITAR</button>
-                                        <button wire:click="delete({{ $aldea->id }})" class="btn btn-danger"
-                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">BORRAR</button>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>{{ $aldea->id }}</td>
+                                <td>{{ $aldea->descripcion }}</td>
+                                <!-- Mostramos el nombre del municipio al que pertenece la aldea -->
+                                <td>{{ $aldea->municipio->descripcion }}</td>
+                                <td class="col-2">
+                                    <!-- Botones para editar y borrar -->
+                                    <button wire:click="edit({{ $aldea->id }})" class="btn btn-warning"
+                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">EDITAR</button>
+                                    <button wire:click="delete({{ $aldea->id }})" class="btn btn-danger"
+                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">BORRAR</button>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>

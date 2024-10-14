@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamp('fecha_hora'); // Campo para Fecha_hora
             $table->string('entrevistador'); // Campo para Entrevistador
             $table->string('supervisor'); // Campo para Supervisor
+            $table->string('entrevistado')->nullable(); // O el tipo de dato que necesites
             $table->foreignId('id_departamento')->constrained('departamentos'); // Campo para Id_Departamento
             $table->foreignId('id_municipio')->constrained('municipios'); // Campo para Id_Municipio
             $table->foreignId('id_aldeas')->constrained('aldeas'); // Campo para Id_Comunidad
