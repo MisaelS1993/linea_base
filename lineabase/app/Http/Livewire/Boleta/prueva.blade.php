@@ -210,131 +210,18 @@
 
                             @if ($totalBuildings >= 1)
 
-                                <!-- Pregunta 10.-Total de Unidades -->
-                                <div class="form-group col-md-4">
-                                    <label for="totalUnits">10.-Total de Unidades:</label>
-                                    <input type="number" placeholder="Cantidad de Unidades" class="form-control @error('totalUnits') is-invalid @enderror" wire:model="totalUnits" name="totalUnits" id="totalUnits" required>
-                                    @error('totalUnits')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
 
-                                <!-- Pregunta 11.-Edificacion N° -->
-                                <div class="form-group col-md-4">
-                                    <label for="buildingNumber">11.-Edificacion N°:</label>
-                                    <input type="text" placeholder="Número de Edificación" class="form-control @error('buildingNumber') is-invalid @enderror" wire:model="buildingNumber" name="buildingNumber" id="buildingNumber" required>
-                                    @error('buildingNumber')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
 
-                                <!-- Pregunta 12.-Material de las Paredes -->
-                                <div class="form-group col-md-4">
-                                    <label for="wallMaterial">12.-Material de las Paredes:</label>
-                                    <select class="form-control @error('wallMaterial') is-invalid @enderror" wire:model="wallMaterial" name="wallMaterial" id="wallMaterial" required>
-                                        <option value="">Seleccione el Material de las Paredes</option>
-                                        <option value="1">01. Adobe</option>
-                                        <option value="2">02. Bloque</option>
-                                        <option value="3">03. Bahareque</option>
-                                        <option value="4">04. Madera</option>
-                                        <option value="5">05. Desperdicios</option>
-                                        <option value="6">06. Ladrillo</option>
-                                        <option value="7">07. Yagua</option>
-                                        <option value="8">08. Otro</option>
-                                        <option value="9">09. No Tiene</option>
-                                        <option value="10">10. NS/NR</option>
-                                    </select>
-                                    @error('wallMaterial')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
+                                
+                               
 
-                                <!-- Pregunta 13.-Material del Techo -->
-                                <div class="form-group col-md-4">
-                                    <label for="roofMaterial">13.-Material del Techo:</label>
-                                    <select class="form-control @error('roofMaterial') is-invalid @enderror" wire:model="roofMaterial" name="roofMaterial" id="roofMaterial" required>
-                                        <option value="">Seleccione el Material del Techo</option>
-                                        <option value="1">1. Desechos</option>
-                                        <option value="2">2. Paja o similar</option>
-                                        <option value="3">3. Teja de barro</option>
-                                        <option value="4">4. Lámina metálica</option>
-                                        <option value="5">5. Lámina de asbesto</option>
-                                        <option value="6">6. Concreto</option>
-                                        <option value="7">7. Shingle</option>
-                                        <option value="8">8. Otro</option>
-                                        <option value="9">9. NS/NR</option>
-                                    </select>
-                                    @error('roofMaterial')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
+                                
 
-                                <!-- Pregunta 14.-Material del Piso -->
-                                <div class="form-group col-md-4">
-                                    <label for="floorMaterial">14.-Material del Piso:</label>
-                                    <select class="form-control @error('floorMaterial') is-invalid @enderror" wire:model="floorMaterial" name="floorMaterial" id="floorMaterial" required>
-                                        <option value="">Seleccione el Material del Piso</option>
-                                        <option value="1">1. Tierra</option>
-                                        <option value="2">2. Plancha cem.</option>
-                                        <option value="3">3. Madera rústica</option>
-                                        <option value="4">4. Ladrillo de barro</option>
-                                        <option value="5">5. Granito</option>
-                                        <option value="6">6. Cerámica</option>
-                                        <option value="7">7. Mosaico</option>
-                                        <option value="8">8. Otro</option>
-                                        <option value="9">9. NS/NR</option>
-                                    </select>
-                                    @error('floorMaterial')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
+                                
 
-                                <!-- Pregunta 15.-Principal problema de la edificación -->
-                                <div class="form-group col-md-4">
-                                    <label for="buildingIssue">15.-Principal problema de la edificación:</label>
-                                    <select class="form-control @error('buildingIssue') is-invalid @enderror" wire:model="buildingIssue" name="buildingIssue" id="buildingIssue" required>
-                                        <option value="">Seleccione el Principal problema de la edificación</option>
-                                        <option value="1">1. Sin repello externo</option>
-                                        <option value="2">2. Sin repello interno</option>
-                                        <option value="3">3. Sin ambos repellos</option>
-                                        <option value="4">4. Piso de tierra</option>
-                                        <option value="5">5. Falta de cielo falso</option>
-                                        <option value="6">6. Techo en mal estado</option>
-                                        <option value="7">7. Otro</option>
-                                        <option value="8">8. Ninguno</option>
-                                    </select>
-                                    @error('buildingIssue')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
+                               
 
-                                <!-- Pregunta 16.-Condición de la Edificación -->
-                                <div class="form-group col-md-4">
-                                    <label for="buildingCondition">16.-Condición de la Edificación:</label>
-                                    <select class="form-control @error('buildingCondition') is-invalid @enderror" wire:model="buildingCondition" name="buildingCondition" id="buildingCondition" required>
-                                        <option value="">Seleccione la Condición de la Edificación</option>
-                                        <option value="1">1. Buena</option>
-                                        <option value="2">2. Regular</option>
-                                        <option value="3">3. Mala</option>
-                                    </select>
-                                    @error('buildingCondition')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
+                                
 
                                 <!-- Pregunta 17. Unidad No. -->
                                 <div class="form-group col-md-4">

@@ -9,7 +9,7 @@
 
 
                 <!-- Botón para abrir el modal -->
-                <button type="button" wire:click="create()" class="btn btn-success btn-bordered mt-2 mb-2 float-end mr-2 round" data-bs-toggle="modal" data-bs-target="#boleta">
+                <button type="button" wire:click="create()" class="btn btn-success btn-bordered mt-2 mb-2 float-end mr-4 round" data-bs-toggle="modal" data-bs-target="#boleta">
                     <div class="spinner-grow spinner-grow-sm" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>
@@ -32,7 +32,7 @@
             @endif
             <!-- Campo de búsqueda por municipio -->
             <div class="row mb-3 mt-3">
-                <div class="col-3 float-end">
+                <div class="col-3 col-md-12 float-end">
                     <input type="text" wire:model="searchTerm" class="form-control" placeholder="Buscar por nombre de municipio">
                 </div>
             </div>

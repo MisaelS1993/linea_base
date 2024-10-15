@@ -8,17 +8,71 @@ use App\Models\Departamento;
 use App\Models\Municipio;
 use App\Models\Aldea;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+
+use App\Models\Edificacion;
 // Asegúrate de importar el modelo Control
 
 class ControlCrud extends Component
 {
-    public $controls, $control_id, $fecha_hora, $entrevistador, $supervisor, $id_departamento, $id_municipio, $id_aldeas, $observacion, $telefono, $no_manzana, $no_lote, $ubicacion_vivienda, $no_catastral, $entrevistado;
+    //variable para el modal
     public $isModalOpen = false;
-
+    //Vaiables para cargar datos de tablas ya creada
     public $departamentos; // Almacena los departamentos
     public $municipios = []; // Almacena los municipios filtrados
-    public $aldeas = [];
-    
+    public $aldeas = []; //Almacena aldeas
+
+    //variables de la tabla Control
+    public $controls, $control_id, $fecha_hora, $entrevistador, $supervisor, $id_departamento, $id_municipio, $id_aldeas;
+    public $observacion, $telefono, $no_manzana, $no_lote, $ubicacion_vivienda, $no_catastral, $entrevistado;
+
+    //Varibles de la tabla edificaciones
+    public $edificacions, $edificacions_id, $total_edificaciones, $total_unidades, $no_edificacion, $material_paredes;
+    public $material_techo, $material_piso, $problema_edificacion, $condicion_edificacion;
+
+    // Abrir el modal
+    public function openModal()
+    {
+        $this->isModalOpen = true;
+    }
+
+    // Cerrar el modal
+    public function closeModal()
+    {
+        $this->isModalOpen = false;
+    }
+
+    // Reiniciar los campos del formulario
+    public function resetForm()
+    {
+        // Variables de la tabla Control
+        $this->control_id = null;
+        $this->fecha_hora = '';
+        $this->entrevistador = '';
+        $this->supervisor = '';
+        $this->entrevistado = '';
+        $this->id_departamento = null;
+        $this->id_municipio = null;
+        $this->id_aldeas = null;
+        $this->observacion = '';
+        $this->telefono = '';
+        $this->no_manzana = '';
+        $this->no_lote = '';
+        $this->ubicacion_vivienda = '';
+        $this->no_catastral = '';
+
+        // Variables de la tabla Edificacion
+        $this->edificacions_id = null; // Id de edificacion (clave primaria)
+        $this->total_edificaciones = null;
+        $this->total_unidades = null;
+        $this->no_edificacion = null;
+        $this->material_paredes = '';
+        $this->material_techo = '';
+        $this->material_piso = '';
+        $this->problema_edificacion = '';
+        $this->condicion_edificacion = '';
+    }
 
 
     public function mount()
@@ -52,10 +106,7 @@ class ControlCrud extends Component
     {
         // Obtener todos los registros de control con relaciones de aldea, municipio y departamento
         $this->controls = Control::with('Aldea', 'Municipio', 'Departamento')->get();
-
-        return view('livewire.boleta.control-crud', [
-            'controls' => $this->controls,
-        ]);
+        return view('livewire.boleta.control-crud', ['controls' => $this->controls,]);
         if (Auth::check()) {
             $this->entrevistador = Auth::user()->name; // Obtén el nombre del usuario logueado
         }
@@ -87,6 +138,16 @@ class ControlCrud extends Component
             'no_lote' => 'required|string|max:10',
             'ubicacion_vivienda' => 'required|string|max:255',
             'no_catastral' => 'required|string|max:20',
+            'total_edificaciones' => 'required|integer|min:0',
+
+            //de aqui en adelante validamos las pregungtas que total_edificaciones sean mayor 1
+            'total_unidades' => 'required_unless:total_edificaciones,0|nullable|integer|min:0|max:100',
+            'no_edificacion' => 'required_unless:total_edificaciones,0|nullable|integer|min:0|max:100',
+            'material_paredes' => 'required_unless:total_edificaciones,0|nullable|integer|in:1,2,3,4,5,6,7,8,9,10',
+            'material_techo' => 'required_unless:total_edificaciones,0|nullable|integer|in:1,2,3,4,5,6,7,8,9',
+            'material_piso' => 'required_unless:total_edificaciones,0|nullable|integer|in:1,2,3,4,5,6,7,8,9',
+            'problema_edificacion' => 'required_unless:total_edificaciones,0|nullable|integer|in:1,2,3,4,5,6,7,8',
+            'condicion_edificacion' => 'required_unless:total_edificaciones,0|nullable|integer|in:1,2,3',
         ];
     }
 
@@ -95,34 +156,65 @@ class ControlCrud extends Component
         // Llama al método 'rules' para validar los datos
         $this->validate($this->rules());
 
-        Control::updateOrCreate(['id' => $this->control_id], [
-            'fecha_hora' => $this->fecha_hora,
-            'entrevistador' => Auth::user()->name,
-            'supervisor' => $this->supervisor,
-            'entrevistado' => $this->entrevistado,
-            'id_departamento' => $this->id_departamento,
-            'id_municipio' => $this->id_municipio,
-            'id_aldeas' => $this->id_aldeas,
-            'observacion' => $this->observacion,
-            'telefono' => $this->telefono,
-            'no_manzana' => $this->no_manzana,
-            'no_lote' => $this->no_lote,
-            'ubicacion_vivienda' => $this->ubicacion_vivienda,
-            'no_catastral' => $this->no_catastral,
-        ]);
+        // Iniciar transacción
+        DB::beginTransaction();
+        try {
+            $control = Control::updateOrCreate(
+                ['id' => $this->control_id], // Si existe, lo actualiza, si no, lo crea
+                [
+                    'fecha_hora' => $this->fecha_hora,
+                    'entrevistador' => Auth::user()->name,
+                    'supervisor' => $this->supervisor,
+                    'entrevistado' => $this->entrevistado,
+                    'id_departamento' => $this->id_departamento,
+                    'id_municipio' => $this->id_municipio,
+                    'id_aldeas' => $this->id_aldeas,
+                    'observacion' => $this->observacion,
+                    'telefono' => $this->telefono,
+                    'no_manzana' => $this->no_manzana,
+                    'no_lote' => $this->no_lote,
+                    'ubicacion_vivienda' => $this->ubicacion_vivienda,
+                    'no_catastral' => $this->no_catastral,
+                ]
+            );
 
-        session()->flash('message', $this->control_id ? 'Boleta actualizada.' : 'Boleta creada.');
+            // Guardar en la tabla 'Edificacion', asociada al 'Control'
+            Edificacion::updateOrCreate(
+                ['id' => $this->edificacions_id], // Si existe, lo actualiza, si no, lo crea
+                [
+                    'id_controls' => $control->id, // Aquí usamos el ID del control recién creado
+                    'total_edificaciones' => $this->total_edificaciones,
+                    'total_unidades' => $this->total_edificaciones == 0 ? null : $this->total_unidades,
+                    'no_edificacion' => $this->total_edificaciones == 0 ? null : $this->no_edificacion,
+                    'material_paredes' => $this->total_edificaciones == 0 ? null : $this->material_paredes,
+                    'material_techo' => $this->total_edificaciones == 0 ? null : $this->material_techo,
+                    'material_piso' => $this->total_edificaciones == 0 ? null : $this->material_piso,
+                    'problema_edificacion' => $this->total_edificaciones == 0 ? null : $this->problema_edificacion,
+                    'condicion_edificacion' => $this->total_edificaciones == 0 ? null : $this->condicion_edificacion,
+                ]
+            );
 
-        $this->resetForm(); // Llama al nuevo método
-        $this->closeModal();
 
+            DB::commit();
+
+            session()->flash('message', $this->control_id ? 'Boleta actualizada.' : 'Boleta creada.');
+
+            $this->resetForm(); // Llama al nuevo método
+            $this->closeModal();
+        } catch (\Exception $e) {
+            // En caso de error, deshacer la transacción
+            DB::rollBack();
+
+            // Puedes lanzar una excepción o manejar el error como desees
+            throw $e;
+        }
     }
-
 
     public function edit($id)
     {
+        // Obtener el registro de la tabla 'Control'
         $control = Control::findOrFail($id);
-        $this->control_id = $id;
+        $this->control_id = $control->id;
         $this->fecha_hora = $control->fecha_hora;
         $this->entrevistador = $control->entrevistador;
         $this->supervisor = $control->supervisor;
@@ -136,43 +228,54 @@ class ControlCrud extends Component
         $this->no_lote = $control->no_lote;
         $this->ubicacion_vivienda = $control->ubicacion_vivienda;
         $this->no_catastral = $control->no_catastral;
+
+        // Obtener el registro relacionado de la tabla 'Edificacion' usando la clave foránea
+        $edificacion = Edificacion::where('id_controls', $control->id)->first(); // Clave foránea
+        if ($edificacion) {
+            $this->edificacions_id = $edificacion->id; // ID de edificacion (clave primaria)
+            $this->total_edificaciones = $edificacion->total_edificaciones;
+            $this->total_unidades = $edificacion->total_unidades;
+            $this->no_edificacion = $edificacion->no_edificacion;
+            $this->material_paredes = $edificacion->material_paredes;
+            $this->material_techo = $edificacion->material_techo;
+            $this->material_piso = $edificacion->material_piso;
+            $this->problema_edificacion = $edificacion->problema_edificacion;
+            $this->condicion_edificacion = $edificacion->condicion_edificacion;
+        } else {
+            // Si no existe registro en la tabla 'Edificacion', se resetean los campos
+            $this->resetEdificacionFields();
+        }
+
+        // Abrir modal o lo que sea necesario después de la carga de datos
         $this->openModal();
     }
 
     public function delete($id)
     {
-        Control::find($id)->delete();
-        session()->flash('message', 'Boleta eliminada.');
-        $this->controls = Control::all();
-    }
-    // Abrir el modal
-    public function openModal()
-    {
-        $this->isModalOpen = true;
-    }
+        // Iniciar transacción
+        DB::beginTransaction();
 
-    // Cerrar el modal
-    public function closeModal()
-    {
-        $this->isModalOpen = false;
-    }
+        try {
+            // Primero eliminar el registro relacionado en 'Edificacion'
+            Edificacion::where('id_controls', $id)->delete(); // Usando la clave foránea 'id_controls'
 
-    // Reiniciar los campos del formulario
-    public function resetForm() // Renombrado a resetForm
-    {
-        $this->control_id = null;
-        $this->fecha_hora = '';
-        $this->entrevistador = '';
-        $this->supervisor = '';
-        $this->entrevistado = '';
-        $this->id_departamento = null;
-        $this->id_municipio = null;
-        $this->id_aldeas = null;
-        $this->observacion = '';
-        $this->telefono = '';
-        $this->no_manzana = '';
-        $this->no_lote = '';
-        $this->ubicacion_vivienda = '';
-        $this->no_catastral = '';
+            // Luego, eliminar el registro en 'Control'
+            Control::find($id)->delete();
+
+            // Confirmar transacción
+            DB::commit();
+
+            // Mostrar mensaje de éxito
+            session()->flash('message', 'Boleta eliminada.');
+
+            // Actualizar la lista de controles (si lo necesitas en el frontend)
+            $this->controls = Control::all();
+        } catch (\Exception $e) {
+            // Deshacer transacción si ocurre un error
+            DB::rollBack();
+
+            // Manejar el error según sea necesario
+            throw $e;
+        }
     }
 }
