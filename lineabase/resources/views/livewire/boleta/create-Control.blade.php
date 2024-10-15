@@ -6,7 +6,7 @@
 
             <div class="modal-header bg-success text-light">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">{{ $control_id ? 'Editar Boleta' : 'Crear Nueva Boleta' }}</h1>
-                <button type="button" class="btn-close" wire:click="closeModal()" aria-label="Close"></button>
+                <button type="button" class="btn-close  bg-light" wire:click="closeModal()" aria-label="Close"></button>
             </div>
 
             <form wire:submit.prevent="store">
@@ -337,7 +337,7 @@
 
                 <div class="modal-footer justify-content-center bg-success">
                     <hr>
-                    <button type="button" class="btn btn-secondary" wire:click="closeModal()">Cancelar</button>
+                    <button type="button" class="btn btn-dark" wire:click="closeModal()">Cancelar</button>
                     <button type="submit" class="btn btn-primary">{{ $control_id ? 'Actualizar' : 'Guardar' }}</button>
                 </div>
 
