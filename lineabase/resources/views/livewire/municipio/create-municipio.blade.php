@@ -1,11 +1,11 @@
 <!-- Modal -->
 @if($isModalOpen)
-<div class="modal fade text-left show" data-bs-backdrop="static" data-bs-keyboard="false" style="display: block;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade show"id="boleta" tabindex="-1" aria-labelledby="boleta" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered"> <!-- Centrado -->
-        <div class="modal-content bg-success-subtle border border-secondary">
-            <div class="modal-header">
+        <div class="modal-content bg-success-subtle border border-success shadow-lg p-3 mb-5">
+            <div class="modal-header bg-success text-light">
                 <h1 class="modal-title  fs-5" id="exampleModalLabel">{{ $municipio_id ? 'Editar Municipio' : 'Crear Nuevo Municipio' }}</h1>
-                <button type="button" class="btn-close" wire:click="closeModal()" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" wire:click="closeModal()" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form wire:submit.prevent="store">
@@ -30,9 +30,9 @@
                         @error('descripcion') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-secondary" wire:click="closeModal()">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">{{ $municipio_id ? 'Actualizar' : 'Guardar' }}</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-bs-dismiss="modal" wire:click="closeModal()">Cancelar</button>
+                        <button type="submit" class="btn btn-success">{{ $municipio_id ? 'Actualizar' : 'Guardar' }}</button>
                     </div>
                 </form>
             </div>
