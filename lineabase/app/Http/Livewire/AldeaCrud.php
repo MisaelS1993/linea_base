@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class AldeaCrud extends Component
 {
     public $aldeas, $municipios, $municipio_id, $descripcion, $aldea_id;
-    public $isModalOpen = false; 
+    public $isModalOpen;
 
     public $searchTerm = ''; // Para la búsqueda por nombre de aldea o municipio
 
@@ -61,12 +61,14 @@ class AldeaCrud extends Component
     public function openModal()
     {
         $this->isModalOpen = true;
+        $this->dispatchBrowserEvent('open-modal'); // Disparar evento para abrir modal
     }
 
     // Cerrar el modal
     public function closeModal()
     {
         $this->isModalOpen = false;
+        $this->dispatchBrowserEvent('close-modal'); // Disparar evento para cerrar modal
     }
 
     // Reiniciar los campos del formulario
