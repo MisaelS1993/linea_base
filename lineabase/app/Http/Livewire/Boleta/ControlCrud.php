@@ -17,7 +17,7 @@ use App\Models\Edificacion;
 class ControlCrud extends Component
 {
     //variable para el modal
-    public $isModalOpen = false;
+    public $isModalOpen;
     //Vaiables para cargar datos de tablas ya creada
     public $departamentos; // Almacena los departamentos
     public $municipios = []; // Almacena los municipios filtrados
@@ -35,12 +35,14 @@ class ControlCrud extends Component
     public function openModal()
     {
         $this->isModalOpen = true;
+        $this->dispatchBrowserEvent('open-modal'); // Disparar evento para abrir modal
     }
 
     // Cerrar el modal
     public function closeModal()
     {
         $this->isModalOpen = false;
+        $this->dispatchBrowserEvent('close-modal'); // Disparar evento para cerrar modal
     }
 
     // Reiniciar los campos del formulario
