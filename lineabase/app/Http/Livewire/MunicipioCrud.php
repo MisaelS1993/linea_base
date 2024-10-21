@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class MunicipioCrud extends Component
 {
     public $municipios, $departamentos, $departamento_id, $descripcion, $municipio_id;
-    public $isModalOpen = false;
+    public $isModalOpen;
 
     public $searchTerm = ''; // Para la búsqueda por nombre de municipio
 
@@ -58,11 +58,13 @@ class MunicipioCrud extends Component
     public function openModal()
     {
         $this->isModalOpen = true;
+        $this->dispatchBrowserEvent('open-modal'); // Disparar evento para abrir modal
     }
 
     public function closeModal()
     {
         $this->isModalOpen = false;
+        $this->dispatchBrowserEvent('close-modal'); // Disparar evento para cerrar modal
     }
 
     public function resetFields()
