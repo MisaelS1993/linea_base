@@ -57,7 +57,7 @@ class DepartamentoCrud extends Component
         ]);
 
         session()->flash('message', $this->departamento_id ? 'Departamento actualizado correctamente.' : 'Departamento creado correctamente.');
-
+        
         $this->closeModal();
         $this->resetInputFields();
     }

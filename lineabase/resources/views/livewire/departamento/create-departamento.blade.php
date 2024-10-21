@@ -1,7 +1,7 @@
 <!-- Modal -->
-<section id="modal-themes">
-    <div class="modal fade text-left show" id="myModal" data-bs-keyboard="false" style="display: block;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+<section id="modal">
+    <div wire:ignore.self class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" style="display: block;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"
             role="document">
             <div class="modal-content">
                 <div class="modal-header btn-success">
@@ -18,7 +18,7 @@
                     <div class="modal-body">
 
                         <div class="mb-3">
-                            <label for="descripcion" class="form-label">Descripción</label>
+                            <label for="descripcion" class="form-label">Nombre del departamento</label>
                             <input type="text" id="descripcion" wire:model="descripcion" class="form-control">
                             @error('descripcion') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>

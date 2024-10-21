@@ -35,7 +35,7 @@
                 <!-- Botón para abrir el modal -->
                 <button type="button" wire:click="create()" class="btn btn-success btn-sm mr-2 mb-2 mt-2" data-bs-toggle="modal" data-bs-target="#myModal">
                     <i data-feather="file-plus"></i>
-                    <b>Nuevo Departamento</b>
+                    <b>Agregar</b>
                 </button>
             </div>
             <div class="card-body">
@@ -65,8 +65,8 @@
                                     <td>{{ $departamento->id }}</td>
                                     <td>{{ $departamento->descripcion }}</td>
                                     <td class="col-2">
-                                        <button wire:click="edit({{ $departamento->id }})" class="btn text-warning"><i data-feather="edit"></i></button>
-                                        <button wire:click="delete({{ $departamento->id }})" class="btn text-danger"><i data-feather="trash"></i></button>
+                                        <button wire:click="edit({{ $departamento->id }})" class="btn text-warning btn-sm"><i data-feather="edit"></i>Editar</button>
+                                        <button wire:click="delete({{ $departamento->id }})" class="btn text-danger btn-sm"><i data-feather="trash"></i>Borrar</button>
                                     </td>
                                 </tr>
                                 @endforeach
