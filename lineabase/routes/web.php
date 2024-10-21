@@ -33,7 +33,7 @@ Route::middleware([
 
     Route::get('/departamentos', DepartamentoCrud::class)->name('departamentos.index');
     Route::get('/municipios', MunicipioCrud::class)->name('municipios.index');
-    Route::get('/aldeas', AldeaCrud::class)->name('aldea.index');
+    Route::get('/aldeas', AldeaCrud::class)->name('aldeas.index');
 
 
     Route::get('/control', ControlCrud::class)->name('control.index');

@@ -1,5 +1,5 @@
-<div class="sidebar-wrapper active bg-success ">
-    <div class="sidebar-header bg-success-subtle mt-2 ml-2  mr-2 mb-2 text-center border border-secondary">
+<div class="sidebar-wrapper active">
+    <div class="sidebar-header mt-2 ml-2  mr-2 mb-2 text-center">
         <img src="assets/images/favicon.ico" class="h-100 d-inline-block mt-0 mb-0" style="width: 150px;">
     </div>
     <div class="sidebar-menu">
@@ -11,7 +11,7 @@
 
 
             <li class="sidebar-item {{ Request::is('dashboard') ? 'active' : '' }}">
-                <a href="/dashboard" class='sidebar-link'>
+                <a href="{{route('dashboard')}}" class='sidebar-link'>
                     <i data-feather="home" width="20"></i>
                     <span class=""><b>Dashboard</b></span>
                 </a>
@@ -19,7 +19,7 @@
             </li>
 
             <li class="sidebar-item {{ Request::is('control') ? 'active' : '' }}">
-                <a href="/control" class='sidebar-link text-ligth'>
+                <a href="{{route('control.index')}}" class='sidebar-link text-ligth'>
                     <i data-feather="file-text" width="20"></i>
                     <span class=""><b>Boleta</b></span>
                 </a>
@@ -35,15 +35,15 @@
                 <ul class="submenu ">
 
                     <li>
-                        <a class="text-light" href="/departamentos"><b>Departamentos</b></a>
+                        <a class="text-light" href="{{route('departamentos.index')}}"><b>Departamentos</b></a>
                     </li>
 
                     <li>
-                        <a class="text-light" href="/municipios"><b>Municipios</b></a>
+                        <a class="text-light" href="{{route('municipios.index')}}"><b>Municipios</b></a>
                     </li>
 
                     <li>
-                        <a class="text-light" href="/aldeas"><b>Aldeas</b></a>
+                        <a class="text-light" href="{{route('aldeas.index')}}"><b>Aldeas</b></a>
                     </li>
 
 

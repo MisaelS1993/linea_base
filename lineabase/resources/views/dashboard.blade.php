@@ -7,7 +7,7 @@
             <div class="row mb-2">
                 <div class="col-12 col-md-3">
                     <div class="card card-statistic">
-                        <div class="card-body p-0 bg-success">
+                        <div class="card-body p-0">
                             <div class="d-flex flex-column">
                                 <div class='px-3 py-3 d-flex justify-content-between'>
                                     <h3 class='card-title'>COPAN</h3>
@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-12 col-md-3">
                     <div class="card card-statistic">
-                        <div class="card-body p-0 bg-success">
+                        <div class="card-body p-0">
                             <div class="d-flex flex-column">
                                 <div class='px-3 py-3 d-flex justify-content-between'>
                                     <h3 class='card-title'>OCOTEPEQUE</h3>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-12 col-md-3">
                     <div class="card card-statistic">
-                        <div class="card-body p-0 bg-success">
+                        <div class="card-body p-0">
                             <div class="d-flex flex-column">
                                 <div class='px-3 py-3 d-flex justify-content-between'>
                                     <h3 class='card-title'>LEMPIRA</h3>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-12 col-md-3">
                     <div class="card card-statistic">
-                        <div class="card-body p-0 bg-success">
+                        <div class="card-body p-0">
                             <div class="d-flex flex-column">
                                 <div class='px-3 py-3 d-flex justify-content-between'>
                                     <h3 class='card-title'>Sales Today</h3>

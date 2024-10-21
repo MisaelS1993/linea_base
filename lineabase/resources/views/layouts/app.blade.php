@@ -21,7 +21,7 @@
                 </main>
             </div>
 
-            <footer class="bg-light text-muted">
+            <footer class="text-muted">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 text-left">
