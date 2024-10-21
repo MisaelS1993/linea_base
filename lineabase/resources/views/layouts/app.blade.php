@@ -14,7 +14,7 @@
         </div>
         <div id="main">
             @include('layouts.navigation')
-            <div class="main-content container-fluid">
+            <div class="">
                 <!-- Page Content -->
                 <main>
                     {{ $slot }}

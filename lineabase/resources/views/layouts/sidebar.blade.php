@@ -13,7 +13,7 @@
             <li class="sidebar-item {{ Request::is('dashboard') ? 'active' : '' }}">
                 <a href="{{route('dashboard')}}" class='sidebar-link'>
                     <i data-feather="home" width="20"></i>
-                    <span class=""><b>Dashboard</b></span>
+                    <span class="">Dashboard</span>
                 </a>
 
             </li>
@@ -21,7 +21,7 @@
             <li class="sidebar-item {{ Request::is('control') ? 'active' : '' }}">
                 <a href="{{route('control.index')}}" class='sidebar-link text-ligth'>
                     <i data-feather="file-text" width="20"></i>
-                    <span class=""><b>Boleta</b></span>
+                    <span class="">Boleta</span>
                 </a>
 
             </li>
@@ -29,7 +29,7 @@
             <li class="sidebar-item has-sub ">
                 <a href="#" class='sidebar-link'>
                     <i data-feather="globe" width="20"></i>
-                    <span class=""><b>Jusdirección</b></span>
+                    <span class="">Jusdirección</span>
                 </a>
 
                 <ul class="submenu ">

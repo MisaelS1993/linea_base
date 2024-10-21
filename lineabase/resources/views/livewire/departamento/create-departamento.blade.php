@@ -1,6 +1,6 @@
 <!-- Modal -->
 <section id="modal-themes">
-    <div class="modal fade text-left show" data-bs-backdrop="static" id="myModal" data-bs-keyboard="false" style="display: block;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade text-left show" id="myModal" data-bs-keyboard="false" style="display: block;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
             role="document">
             <div class="modal-content">

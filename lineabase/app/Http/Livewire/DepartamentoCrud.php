@@ -30,14 +30,14 @@ class DepartamentoCrud extends Component
     public function openModal()
     {
         $this->isModalOpen = true; // Aquí mantén esto para la lógica de Livewire.
-        $this->emit('openModal');
+        $this->dispatchBrowserEvent('open-modal');
     }
     
 
     public function closeModal()
     {
         $this->isModalOpen = false;
-        $this->emit('closeModal');
+        $this->dispatchBrowserEvent('close-modal');
     }
 
     private function resetInputFields()
