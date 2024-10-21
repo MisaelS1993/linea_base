@@ -8,7 +8,7 @@ use App\Models\Departamento;
 class DepartamentoCrud extends Component
 {
     public $departamentos, $descripcion, $departamento_id;
-    public $isModalOpen;
+    public $isModalOpen = false;
 
     public function render()
     {
@@ -30,14 +30,14 @@ class DepartamentoCrud extends Component
     public function openModal()
     {
         $this->isModalOpen = true; // Aquí mantén esto para la lógica de Livewire.
-        $this->dispatchBrowserEvent('open-modal'); // Disparar evento para abrir modal
+        $this->emit('openModal');
     }
     
 
     public function closeModal()
     {
         $this->isModalOpen = false;
-        $this->dispatchBrowserEvent('close-modal'); // Disparar evento para cerrar modal
+        $this->emit('closeModal');
     }
 
     private function resetInputFields()
