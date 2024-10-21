@@ -2,7 +2,7 @@
 
 return [
 
-    /*
+      /*
     |--------------------------------------------------------------------------
     | Pagination Language Lines
     |--------------------------------------------------------------------------
@@ -12,8 +12,7 @@ return [
     | you want to customize your views to better match your application.
     |
     */
-
+    'next' => 'Siguiente &raquo;',
     'previous' => '&laquo; Anterior',
-    'next'     => 'Siguiente &raquo;',
-
+    'results' => 'Mostrando :first a :last de :total resultados',
 ];
