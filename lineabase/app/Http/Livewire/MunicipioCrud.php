@@ -5,34 +5,70 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Municipio;
 use App\Models\Departamento;
-use Illuminate\Http\Request;
 
 class MunicipioCrud extends Component
 {
-    public $municipios, $departamentos, $departamento_id, $descripcion, $municipio_id;
+    // Variable para el Modal
     public $isModalOpen = false;
 
-    public $searchTerm = ''; // Para la búsqueda por nombre de municipio
+    //variables para busque de registros
+    public $search = '';
 
+    //Variables de tablas
+    protected $municipios;
+    public $departamentos, $departamento_id, $descripcion, $municipio_id;
+
+    //abre Modal
+    public function openModal()
+    {
+        $this->isModalOpen = true;
+        $this->dispatchBrowserEvent('open-modal');
+    }
+
+    //cerrar Modal
+    public function closeModal()
+    {
+        $this->isModalOpen = false;
+        $this->dispatchBrowserEvent('close-modal');
+    }
+
+    // Borrar Datos Controles
+    public function resetFields()
+    {
+        $this->municipio_id = null;
+        $this->descripcion = '';
+        $this->departamento_id = '';
+    }
+
+    // Método para cargar registros
+    public function loadDepartamentos()
+    {
+        $this->municipios = Municipio::when($this->search, function ($query) {
+            $query->where('descripcion', 'like', '%' . $this->search . '%');
+        })->paginate(3);
+
+        // Cargamos todos los departamentos
+        $this->departamentos = Departamento::all(); 
+    }
+
+    // Método para actualizar la paginación si es necesario
+    public function updating()
+    {
+        $this->loadDepartamentos();
+    }
+
+    /*//////////////////////////////////////////////////*/
 
     // Método para renderizar los municipios y departamentos
     public function render()
     {
-        $this->municipios = Municipio::with('departamento')
-            ->where('descripcion', 'like', '%' . $this->searchTerm . '%') // Filtro por nombre del municipio
-            ->orWhereHas('departamento', function ($query) {
-                $query->where('descripcion', 'like', '%' . $this->searchTerm . '%'); // Filtro por nombre del departamento
-            })
-            ->get();
-
-        $this->departamentos = Departamento::all(); // Cargamos todos los departamentos
+        $this->loadDepartamentos();
 
         return view('livewire.municipio.municipio-crud', [
             'municipios' => $this->municipios,
             'departamentos' => $this->departamentos,
         ]);
     }
-
 
     public function create()
     {
@@ -47,29 +83,14 @@ class MunicipioCrud extends Component
         $this->descripcion = $municipio->descripcion;
         $this->departamento_id = $municipio->departamento_id;
         $this->openModal();
+        $this->loadDepartamentos();
     }
 
     public function delete($id)
     {
         Municipio::find($id)->delete();
         session()->flash('message', 'Municipio eliminado exitosamente.');
-    }
-
-    public function openModal()
-    {
-        $this->isModalOpen = true;
-    }
-
-    public function closeModal()
-    {
-        $this->isModalOpen = false;
-    }
-
-    public function resetFields()
-    {
-        $this->municipio_id = null;
-        $this->descripcion = '';
-        $this->departamento_id = '';
+        $this->loadDepartamentos();
     }
 
     public function store()

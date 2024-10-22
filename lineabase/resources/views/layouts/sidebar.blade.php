@@ -35,15 +35,15 @@
                 <ul class="submenu ">
 
                     <li>
-                        <a class="text-light" href="{{route('departamentos.index')}}"><b>Departamentos</b></a>
+                        <a class="text-light" href="{{route('departamentos.index')}}"></i><b>Departamentos</b></a>
                     </li>
 
                     <li>
-                        <a class="text-light" href="{{route('municipios.index')}}"><b>Municipios</b></a>
+                        <a class="text-light" href="{{route('municipios.index')}}"></i><b>Municipios</b></a>
                     </li>
 
                     <li>
-                        <a class="text-light" href="{{route('aldeas.index')}}"><b>Aldeas</b></a>
+                        <a class="text-light" href="{{route('aldeas.index')}}"></i><b>Aldeas</b></a>
                     </li>
 
 

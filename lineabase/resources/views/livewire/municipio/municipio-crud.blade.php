@@ -1,75 +1,104 @@
 <div class="container mt-5">
-    <!-- Modal para crear/editar municipios -->
-    @if($isModalOpen)
-    @include('livewire.municipio.create-municipio') <!-- Tu modal aquí -->
-    @endif
-
-    <div class="card border-success">
-        <div class="card-header bg-success">
-            <h3 class="mt-4">Gestor de Municipios</h3>
-        </div>
-
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Botón para abrir el modal -->
-                    <button type="button" wire:click="create()" class="btn btn-success round mt-2 mb-2 float-end mr-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <div class="spinner-grow spinner-grow-sm" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                        <b>Nuevo Municipio</b>
-                    </button>
-                </div>
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Gestor de Municipios</h3>
+                <p class="text-subtitle text-muted">Aquí podrás gestionar todos los Municipios. ¡Explora y administra los municipios de manera fácil y eficiente!</p>
             </div>
-            <!-- Mensaje de éxito -->
-            @if(session()->has('message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('message') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
-
-             <!-- Campo de búsqueda por municipio -->
-             <div class="row mb-3">
-                <div class="col-3 float-end">
-                    <input type="text" wire:model="searchTerm" class="form-control" placeholder="Buscar por nombre de municipio">
-                </div>
-            </div>
-
-
-            <div class="table-responsive">
-                <div class="col-12">
-                    <!-- Tabla de municipios -->
-                    <table class="table table-bordered">
-                        <thead class="table-success">
-                            <tr>
-                                <th>ID</th>
-                                <th>Descripción</th>
-                                <th>Departamento</th>
-                                <th class="col-2">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($municipios as $municipio)
-                            <tr>
-                                <td>{{ $municipio->id }}</td>
-                                <td>{{ $municipio->descripcion }}</td>
-                                <!-- Cambiamos a $municipio->departamento->descripcion para mostrar el nombre del departamento -->
-                                <td>{{ $municipio->departamento->descripcion }}</td>
-                                <td class="col-2">
-                                    <!-- Botones para editar y borrar -->
-                                    <button wire:click="edit({{ $municipio->id }})" class="btn btn-warning"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">EDITAR</button>
-                                    <button wire:click="delete({{ $municipio->id }})" class="btn btn-danger"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">BORRAR</button>
-                                </td>
-                            </tr>
-                            @endforeach
-
-                        </tbody>
-                    </table>
-                </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('departamentos.index')}}">Departamentos</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('municipios.index')}}">Municipios</a></li>
+                    </ol>
+                </nav>
             </div>
         </div>
     </div>
+
+    <section class="section">
+        <div class="card">
+            <div class="card-header">
+                <!-- Modal para crear/editar aldeas -->
+                @if($isModalOpen)
+                @include('livewire.municipio.create-municipio') <!-- Tu modal aquí -->
+                @endif
+
+                <!-- Alert -->
+                @if (session()->has('message'))
+                <div class="alert alert-success alert-dismissible show fade">
+                    {{ session('message') }}
+                    <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                @endif
+                <div class="row">
+                    <div class="col-md-9">
+                        <!-- Botón para abrir el modal -->
+                        <button type="button" wire:click="create()" class="btn btn-success btn-sm mr-2 mb-2 mt-2" data-bs-toggle="modal" data-bs-target="#myModal">
+                            <i data-feather="file-plus"></i>
+                            <b>Agregar</b>
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="d-flex justify-content-end mt-4">
+                            <div class="input-group">
+                                <input type="text" wire:model="search" class="form-control" placeholder="Buscar registros...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+
+                    <div class="table-responsive">
+                        @if($municipios && $municipios->count() >= 1)
+                        <!-- Tabla de boletas -->
+                        <table class="table dataTable-table table-sm text-center" id="table1">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Descripción</th>
+                                    <th>Departamento</th>
+                                    <th class="col-2">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($municipios as $municipio)
+                                <tr>
+                                    <td>{{ $municipio->id }}</td>
+                                    <td>{{ $municipio->descripcion }}</td>
+                                    <td>{{ $municipio->departamento->descripcion }}</td>
+                                    <td>
+                                        <button wire:click="edit({{ $municipio->id }})" class="btn text-warning btn-sm"><i data-feather="edit"></i>Editar</button>
+                                        <button wire:click="delete({{ $municipio->id }})" class="btn text-danger btn-sm"><i data-feather="trash"></i>Borrar</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                        <!-- Controlar el número de entradas por página -->
+                        {{ $municipios->links('pagination::bootstrap-5') }}
+
+
+                        @else
+                        <p>
+                        <h4 class="text-center">
+                            <i class="text-danger" data-feather="alert-triangle"></i>
+                            ¡No hay ningun registro!
+                        </h4>
+                        </p>
+                        @endif
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
 </div>
