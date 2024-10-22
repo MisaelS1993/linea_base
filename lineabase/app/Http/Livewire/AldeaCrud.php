@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Aldea;
 use App\Models\Municipio;
-use Illuminate\Http\Request;
+use Livewire\WithPagination;
 
 class AldeaCrud extends Component
 {
@@ -18,6 +18,8 @@ class AldeaCrud extends Component
 
     //variables para busque de registros
     public $search = '';
+
+    use WithPagination; // Importar el trait para paginación
 
     // Abrir el modal
     public function openModal()
@@ -49,7 +51,7 @@ class AldeaCrud extends Component
         })->paginate(3);
 
         // Cargamos todos los departamentos
-        $this->municipios = Municipio::all(); 
+        $this->municipios = Municipio::all();
     }
 
     // Método para actualizar la paginación si es necesario
@@ -58,7 +60,14 @@ class AldeaCrud extends Component
         $this->loadDepartamentos();
     }
 
-     /*//////////////////////////////////////////////////*/
+    //Resetea la paginacion
+    public function updatingSearch()
+    {
+        // Restablecer la paginación cuando se cambie el valor de búsqueda
+        $this->resetPage();
+    }
+
+    /*//////////////////////////////////////////////////*/
 
     // Método para renderizar las aldeas y municipios
     public function render()
@@ -94,6 +103,8 @@ class AldeaCrud extends Component
     {
         Aldea::find($id)->delete();
         session()->flash('message', 'Aldea eliminada exitosamente.');
+        // Resetea la paginación después de guardar o actualizar un registro
+        $this->resetPage();
         $this->loadDepartamentos();
     }
 
@@ -114,6 +125,8 @@ class AldeaCrud extends Component
 
         $this->closeModal();
         $this->resetFields();
+        // Resetea la paginación después de guardar o actualizar un registro
+        $this->resetPage();
         $this->loadDepartamentos();
     }
 }

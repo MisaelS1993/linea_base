@@ -11,6 +11,7 @@
                         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Inicio</a></li>
                         <li class="breadcrumb-item"><a href="{{route('departamentos.index')}}">Departamentos</a></li>
                         <li class="breadcrumb-item"><a href="{{route('municipios.index')}}">Municipios</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('aldeas.index')}}">Aldeas</a></li>
                     </ol>
                 </nav>
             </div>

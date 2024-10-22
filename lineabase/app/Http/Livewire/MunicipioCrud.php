@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Municipio;
 use App\Models\Departamento;
+use Livewire\WithPagination;
 
 class MunicipioCrud extends Component
 {
@@ -13,6 +14,8 @@ class MunicipioCrud extends Component
 
     //variables para busque de registros
     public $search = '';
+
+    use WithPagination; // Importar el trait para paginación
 
     //Variables de tablas
     protected $municipios;

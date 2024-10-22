@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Departamento;
+use Livewire\WithPagination;
 
 class DepartamentoCrud extends Component
 {
@@ -12,6 +13,9 @@ class DepartamentoCrud extends Component
 
     //variables para busque de registros
     public $search = '';
+
+
+    use WithPagination; // Importar el trait para paginación
 
     //variables de la tabla
     protected $departamentos;
