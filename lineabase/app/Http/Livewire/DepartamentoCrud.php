@@ -43,7 +43,7 @@ class DepartamentoCrud extends Component
     {
         $this->departamentos = Departamento::when($this->search, function ($query) {
             $query->where('descripcion', 'like', '%' . $this->search . '%');
-        })->paginate(4);
+        })->paginate(3);
     }
 
     // Método para actualizar la paginación si es necesario
