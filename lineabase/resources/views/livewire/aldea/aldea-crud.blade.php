@@ -1,47 +1,65 @@
-<div class="container mt-5">
-    <!-- Modal para crear/editar aldeas -->
-    @if($isModalOpen)
-    @include('livewire.aldea.create-aldea') <!-- Tu modal aquí -->
-    @endif
-
-    <div class="card border-success">
-        <div class="card-header bg-success">
-            <h3 class="mt-4">Gestor de Aldeas</h3>
-        </div>
-
+<div class="main-content container-fluid">
+    <div class="page-title">
         <div class="row">
-            <div class="col-12">
-                <!-- Botón para abrir el modal -->
-                <button type="button" wire:click="create()" class="btn btn-success round mt-2 mb-2 float-end mr-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <div class="spinner-grow spinner-grow-sm" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                    <b>Nueva Aldea</b>
-                </button>
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Gestor de Aldeas</h3>
+                <p class="text-subtitle text-muted">Aquí podrás gestionar todos las Aldeas. ¡Explora y administra las Aldeas de manera fácil y eficiente!</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('departamentos.index')}}">Departamentos</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('municipios.index')}}">Municipios</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('aldeas.index')}}">Aldeas</a></li>
+                    </ol>
+                </nav>
             </div>
         </div>
+    </div>
 
-        <div class="card-body">
-            <!-- Mensaje de éxito -->
-            @if(session()->has('message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('message') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
+    <section class="section">
+        <div class="card">
+            <div class="card-header">
+                <!-- Modal para crear/editar aldeas -->
+                @if($isModalOpen)
+                @include('livewire.aldea.create-aldea') <!-- Tu modal aquí -->
+                @endif
 
-            <!-- Campo de búsqueda por aldea -->
-            <div class="row mb-3">
-                <div class="col-3 float-end">
-                    <input type="text" wire:model="searchTerm" class="form-control" placeholder="Buscar por nombre de aldea o municipio">
+                <!-- Alert -->
+                @if (session()->has('message'))
+                <div class="alert alert-success alert-dismissible show fade">
+                    {{ session('message') }}
+                    <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                @endif
+                <div class="row">
+                    <div class="col-md-9">
+                        <!-- Botón para abrir el modal -->
+                        <button type="button" wire:click="create()" class="btn btn-success btn-sm mr-2 mb-2 mt-2" data-bs-toggle="modal" data-bs-target="#myModal">
+                            <i data-feather="file-plus"></i>
+                            <b>Agregar</b>
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="d-flex justify-content-end mt-4">
+                            <div class="input-group">
+                                <input type="text" wire:model="search" class="form-control" placeholder="Buscar registros...">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="card-body">
+                <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
 
-            <div class="table-responsive">
-                <div class="col-12">
-                    <!-- Tabla de aldeas -->
-                    <table class="table table-bordered">
-                        <thead class="table-success">
+                    <div class="table-responsive">
+                        @if($aldeas && $aldeas->count() >= 1)
+                        <!-- Tabla de boletas -->
+                        <table class="table dataTable-table table-sm text-center" id="table1">
+                            <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Descripción</th>
@@ -56,19 +74,34 @@
                                 <td>{{ $aldea->descripcion }}</td>
                                 <!-- Mostramos el nombre del municipio al que pertenece la aldea -->
                                 <td>{{ $aldea->municipio->descripcion }}</td>
-                                <td class="col-2">
-                                    <!-- Botones para editar y borrar -->
-                                    <button wire:click="edit({{ $aldea->id }})" class="btn btn-warning"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">EDITAR</button>
-                                    <button wire:click="delete({{ $aldea->id }})" class="btn btn-danger"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">BORRAR</button>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                    <td>
+                                        <button wire:click="edit({{ $aldea->id }})" class="btn text-warning btn-sm"><i data-feather="edit"></i>Editar</button>
+                                        <button wire:click="delete({{ $aldea->id }})" class="btn text-danger btn-sm"><i data-feather="trash"></i>Borrar</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                        <!-- Controlar el número de entradas por página -->
+                        {{ $aldeas->links('pagination::bootstrap-5') }}
+
+
+                        @else
+                        <p>
+                        <h4 class="text-center">
+                            <i class="text-danger" data-feather="alert-triangle"></i>
+                            ¡No hay ningun registro!
+                        </h4>
+                        </p>
+                        @endif
+
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+    </section>
+
 </div>

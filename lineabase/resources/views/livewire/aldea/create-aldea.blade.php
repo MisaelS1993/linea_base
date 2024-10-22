@@ -1,16 +1,23 @@
 <!-- Modal -->
-@if($isModalOpen)
-<div class="modal fade text-left show" data-bs-backdrop="static" data-bs-keyboard="false" style="display: block;" tabindex="-1" aria-labelledby="Boleta" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered"> <!-- Centrado -->
-        <div class="modal-content bg-success-subtle border border-secondary">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">{{ $aldea_id ? 'Editar Aldea' : 'Crear Nueva Aldea' }}</h1>
-                <button type="button" class="btn-close" wire:click="closeModal()" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+<section id="modal">
+    <div wire:ignore.self class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" style="display: block;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"
+            role="document">
+            <div class="modal-content">
+                <div class="modal-header btn-success">
+                    <h1 class="modal-title white" id="exampleModalLabel">{{ $aldea_id ? 'Editar Aldea' : 'Crear Nueva Aldea' }}</h1>
+
+                    <button type="button" class="close dark" wire:click="closeModal()" data-bs-dismiss="modal" aria-label="Close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
                 <form wire:submit.prevent="store">
-                    
-                    <!-- Selección del municipio al que pertenece la aldea -->
+                    <div class="modal-body">
+
+                        <!-- Selección del municipio al que pertenece la aldea -->
                     <div class="mb-3">
                         <label for="municipio_id" class="form-label">Municipio</label>
                         <select id="municipio_id" wire:model="municipio_id" class="form-control" required>
@@ -29,13 +36,13 @@
                         @error('descripcion') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-secondary" wire:click="closeModal()">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">{{ $aldea_id ? 'Actualizar' : 'Guardar' }}</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-bs-dismiss="modal" wire:click="closeModal()">Cancelar</button>
+                        <button type="submit" class="btn btn-success">{{ $aldea_id ? 'Actualizar' : 'Guardar' }}</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
-@endif
+</section>

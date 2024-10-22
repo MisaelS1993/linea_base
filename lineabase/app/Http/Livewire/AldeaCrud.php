@@ -9,23 +9,61 @@ use Illuminate\Http\Request;
 
 class AldeaCrud extends Component
 {
-    public $aldeas, $municipios, $municipio_id, $descripcion, $aldea_id;
-    public $isModalOpen = false; 
+    // Variable del modal
+    public $isModalOpen = false;
 
-    public $searchTerm = ''; // Para la búsqueda por nombre de aldea o municipio
+    //Variables de tablas
+    protected $aldeas;
+    public  $municipios, $municipio_id, $descripcion, $aldea_id;
+
+    //variables para busque de registros
+    public $search = '';
+
+    // Abrir el modal
+    public function openModal()
+    {
+        $this->isModalOpen = true;
+        $this->dispatchBrowserEvent('open-modal');
+    }
+
+    // Cerrar el modal
+    public function closeModal()
+    {
+        $this->isModalOpen = false;
+        $this->dispatchBrowserEvent('close-modal');
+    }
+
+    // Reiniciar los campos del formulario
+    public function resetFields()
+    {
+        $this->aldea_id = null;
+        $this->descripcion = '';
+        $this->municipio_id = '';
+    }
+
+    // Método para cargar registros
+    public function loadDepartamentos()
+    {
+        $this->aldeas = Aldea::when($this->search, function ($query) {
+            $query->where('descripcion', 'like', '%' . $this->search . '%');
+        })->paginate(3);
+
+        // Cargamos todos los departamentos
+        $this->municipios = Municipio::all(); 
+    }
+
+    // Método para actualizar la paginación si es necesario
+    public function updating()
+    {
+        $this->loadDepartamentos();
+    }
+
+     /*//////////////////////////////////////////////////*/
 
     // Método para renderizar las aldeas y municipios
     public function render()
     {
-        // Búsqueda por nombre de aldea o municipio
-        $this->aldeas = Aldea::with('municipio')
-            ->where('descripcion', 'like', '%' . $this->searchTerm . '%') // Filtro por nombre de aldea
-            ->orWhereHas('municipio', function ($query) {
-                $query->where('descripcion', 'like', '%' . $this->searchTerm . '%'); // Filtro por nombre del municipio
-            })
-            ->get();
-
-        $this->municipios = Municipio::all(); // Cargamos todos los municipios
+        $this->loadDepartamentos();
 
         return view('livewire.aldea.aldea-crud', [
             'aldeas' => $this->aldeas,
@@ -48,6 +86,7 @@ class AldeaCrud extends Component
         $this->descripcion = $aldea->descripcion;
         $this->municipio_id = $aldea->municipio_id;
         $this->openModal();
+        $this->loadDepartamentos();
     }
 
     // Eliminar una aldea
@@ -55,26 +94,7 @@ class AldeaCrud extends Component
     {
         Aldea::find($id)->delete();
         session()->flash('message', 'Aldea eliminada exitosamente.');
-    }
-
-    // Abrir el modal
-    public function openModal()
-    {
-        $this->isModalOpen = true;
-    }
-
-    // Cerrar el modal
-    public function closeModal()
-    {
-        $this->isModalOpen = false;
-    }
-
-    // Reiniciar los campos del formulario
-    public function resetFields()
-    {
-        $this->aldea_id = null;
-        $this->descripcion = '';
-        $this->municipio_id = '';
+        $this->loadDepartamentos();
     }
 
     // Guardar o actualizar la aldea
@@ -94,5 +114,6 @@ class AldeaCrud extends Component
 
         $this->closeModal();
         $this->resetFields();
+        $this->loadDepartamentos();
     }
 }
