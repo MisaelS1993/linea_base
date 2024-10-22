@@ -33,14 +33,14 @@
                 </div>
                 @endif
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <!-- Botón para abrir el modal -->
                         <button type="button" wire:click="create()" class="btn btn-success btn-sm mr-2 mb-2 mt-2" data-bs-toggle="modal" data-bs-target="#myModal">
                             <i data-feather="file-plus"></i>
                             <b>Agregar</b>
                         </button>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="d-flex justify-content-end mt-4">
                             <div class="input-group">
                                 <input type="text" wire:model="search" class="form-control" placeholder="Buscar registros...">

@@ -17,7 +17,7 @@ class DepartamentoCrud extends Component
     protected $departamentos;
     public  $descripcion, $departamento_id;
 
-        //metodo para abrir modal
+    //metodo para abrir modal
     public function openModal()
     {
         $this->isModalOpen = true; // Aquí mantén esto para la lógica de Livewire.
@@ -41,8 +41,11 @@ class DepartamentoCrud extends Component
     // Método para cargar registros
     public function loadDepartamentos()
     {
-        $this->departamentos = Departamento::paginate(4);
+        $this->departamentos = Departamento::when($this->search, function ($query) {
+            $query->where('descripcion', 'like', '%' . $this->search . '%');
+        })->paginate(4);
     }
+
     // Método para actualizar la paginación si es necesario
     public function updating()
     {
@@ -53,14 +56,13 @@ class DepartamentoCrud extends Component
 
     public function render()
     {
-        $this->departamentos = Departamento::paginate(4);
+        $this->loadDepartamentos();
         
         return view('livewire.departamento.departamento-crud', [
             'isModalOpen' => $this->isModalOpen,
             'departamentos' => $this->departamentos,
         ]);
     }
-
 
     public function create()
     {
