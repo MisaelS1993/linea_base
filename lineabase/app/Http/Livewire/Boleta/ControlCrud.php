@@ -17,14 +17,19 @@ use App\Models\Edificacion;
 class ControlCrud extends Component
 {
     //variable para el modal
-    public $isModalOpen ;
+    public $isModalOpen;
+
+    //variables para busque de registros
+    public $search = '';
+
     //Vaiables para cargar datos de tablas ya creada
     public $departamentos; // Almacena los departamentos
     public $municipios = []; // Almacena los municipios filtrados
     public $aldeas = []; //Almacena aldeas
 
     //variables de la tabla Control
-    public $controls, $control_id, $fecha_hora, $entrevistador, $supervisor, $id_departamento, $id_municipio, $id_aldeas;
+    protected $controls;
+    public $control_id, $fecha_hora, $entrevistador, $supervisor, $id_departamento, $id_municipio, $id_aldeas;
     public $observacion, $telefono, $no_manzana, $no_lote, $ubicacion_vivienda, $no_catastral, $entrevistado;
 
     //Varibles de la tabla edificaciones
@@ -104,15 +109,46 @@ class ControlCrud extends Component
         $this->aldeas = Aldea::where('municipio_id', $value)->get();
     }
 
+
+
+
+    // Método para cargar registros paginados en el controlador Control
+    public function loadControls()
+    {
+        $this->controls = Control::with('aldea', 'municipio', 'departamento')
+            ->when($this->search, function ($query) {
+                $query->where('entrevistador', 'like', '%' . $this->search . '%')
+                    ->orWhereHas('departamento', function ($q) {
+                        $q->where('descripcion', 'like', '%' . $this->search . '%');
+                    })
+                    ->orWhereHas('municipio', function ($q) {
+                        $q->where('descripcion', 'like', '%' . $this->search . '%');
+                    })
+                    ->orWhereHas('aldea', function ($q) {
+                        $q->where('descripcion', 'like', '%' . $this->search . '%');
+                    });
+            })
+            ->paginate(3); // Cambia el número según la cantidad de registros que desees por página
+    }
+
+
+
+    /*///////////////////////////////////////////////////////////////////////////////*/
+
     public function render()
     {
-        // Obtener todos los registros de control con relaciones de aldea, municipio y departamento
-        $this->controls = Control::with('Aldea', 'Municipio', 'Departamento')->get();
-        return view('livewire.boleta.control-crud', ['controls' => $this->controls,]);
+        // Cargar registros paginados a través del método separado
+        $this->loadControls();
+
+        // Verifica si el usuario está autenticado y obtiene el nombre del entrevistador
         if (Auth::check()) {
-            $this->entrevistador = Auth::user()->name; // Obtén el nombre del usuario logueado
+            $this->entrevistador = Auth::user()->name;
         }
+
+        // Retorna la vista con los registros paginados
+        return view('livewire.boleta.control-crud', ['controls' => $this->controls]);
     }
+
 
     // Crear una nueva Boleta
     public function create()
@@ -203,6 +239,7 @@ class ControlCrud extends Component
 
             $this->resetForm(); // Llama al nuevo método
             $this->closeModal();
+            $this->loadControls();
         } catch (\Exception $e) {
             // En caso de error, deshacer la transacción
             DB::rollBack();
@@ -271,7 +308,7 @@ class ControlCrud extends Component
             session()->flash('message', 'Boleta eliminada.');
 
             // Actualizar la lista de controles (si lo necesitas en el frontend)
-            $this->controls = Control::all();
+            $this->loadControls();
         } catch (\Exception $e) {
             // Deshacer transacción si ocurre un error
             DB::rollBack();

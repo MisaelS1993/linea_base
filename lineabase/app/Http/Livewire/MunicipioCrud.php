@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Aldea;
 use Livewire\Component;
 use App\Models\Municipio;
 use App\Models\Departamento;
@@ -44,7 +45,7 @@ class MunicipioCrud extends Component
     }
 
     // Método para cargar registros
-    public function loadDepartamentos()
+    public function loadregist()
     {
         $this->municipios = Municipio::when($this->search, function ($query) {
             $query->where('descripcion', 'like', '%' . $this->search . '%');
@@ -52,12 +53,13 @@ class MunicipioCrud extends Component
 
         // Cargamos todos los departamentos
         $this->departamentos = Departamento::all(); 
+        
     }
 
     // Método para actualizar la paginación si es necesario
     public function updating()
     {
-        $this->loadDepartamentos();
+        $this->loadregist();
     }
 
     /*//////////////////////////////////////////////////*/
@@ -65,7 +67,7 @@ class MunicipioCrud extends Component
     // Método para renderizar los municipios y departamentos
     public function render()
     {
-        $this->loadDepartamentos();
+        $this->loadregist();
 
         return view('livewire.municipio.municipio-crud', [
             'municipios' => $this->municipios,
@@ -86,14 +88,14 @@ class MunicipioCrud extends Component
         $this->descripcion = $municipio->descripcion;
         $this->departamento_id = $municipio->departamento_id;
         $this->openModal();
-        $this->loadDepartamentos();
+        $this->loadregist();
     }
 
     public function delete($id)
     {
         Municipio::find($id)->delete();
         session()->flash('message', 'Municipio eliminado exitosamente.');
-        $this->loadDepartamentos();
+        $this->loadregist();
     }
 
     public function store()
@@ -112,5 +114,7 @@ class MunicipioCrud extends Component
 
         $this->closeModal();
         $this->resetFields();
+
+        $this->loadregist();
     }
 }
